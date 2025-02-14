@@ -4,7 +4,7 @@
 INTERVAL=2
 echo "Запуск мониторинга температуры с обновлением каждые $INTERVAL секунды..."
 LOGFILE="temperature.log"
-sleep 4
+sleep 3
 
 # Проверяем, установлен ли пакет lm-sensors
 if ! command -v sensors &> /dev/null; then
