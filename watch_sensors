@@ -1,0 +1,21 @@
+#!/bin/bash
+
+
+INTERVAL=2
+echo "Запуск мониторинга температуры с обновлением каждые $INTERVAL секунды..."
+LOGFILE="temperature.log"
+sleep 4
+
+# Проверяем, установлен ли пакет lm-sensors
+if ! command -v sensors &> /dev/null; then
+    echo "Ошибка: утилита 'sensors' не установлена. Установите её с помощью: sudo apt install lm-sensors"
+    exit 1
+fi
+
+# Записываем заголовок в лог-файл
+echo "$(date) - Запуск мониторинга температуры" >> "$LOGFILE"
+
+
+# Используем watch для отображения и логирования температуры
+watch -d -n $INTERVAL 'sensors | tee -a "$LOGFILE"'
+
